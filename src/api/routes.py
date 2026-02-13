@@ -28,12 +28,12 @@ def register_user():
     #estamos recibiendo informacion del usuario desde el front end, por eso es DATA
     data = request.get_json()
     if not data.get("email") or not data.get("password"):
-        return jsonify({"Error": "Email and Password required"}), 400
+        return jsonify({"error": "Email and Password required"}), 400
     
     #checkeamos is el user existe, por email, ya que si no existe.. no tiene ID
     existing_user = db.session.execute(select(User).where(User.email == data.get("email"))).scalar_one_or_none()
     if existing_user: # si ya existe, no se puede crear de nuevo.
-        return jsonify({"Error": "User already exist."}), 400
+        return jsonify({"error": "User already exist."}), 400
     
     #si NO existe, entonces lo creamos  --|| new_user busca a mi modelo USER, y en nuestra nueva variable email, ponemos la data que nos arroja el fetch?
     new_user = User(email = data.get("email"))
@@ -43,14 +43,14 @@ def register_user():
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({"msje": "User created succesfully."}), 201
+    return jsonify({"msg": "User created succesfully."}), 201
 
 # ahora toca hacer la ruta para login
 @api.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
     if not data.get("email") or not data.get("password"):
-        return jsonify({"Error": "Email and Password required"}), 400
+        return jsonify({"msg": "Email and Password required"}), 400
     
     user = db.session.execute(select(User).where(User.email == data.get("email"))).scalar_one_or_none()
     
