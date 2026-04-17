@@ -83,8 +83,10 @@ export const Home = () => {
 					/>
 
 				</div>
-				<button type="submit" className="btn btn-primary w-100">Login</button>
-				{/* boton para registrar */}
+				<div className="container d-flex justify-content-center gap-4">
+					<button type="button" className="btn btn-primary"onClick={()=>navigate("/private")}>Login</button>
+					<button type="button" className="btn btn-primary" onClick={()=>navigate("/register")}>Register</button>
+				</div>
 			</form>
 
 		</div>

@@ -24,7 +24,7 @@ def handle_hello():
     return jsonify(response_body), 200
 
 @api.route('/register', methods=['POST'])
-def register_user():
+def register():
     #estamos recibiendo informacion del usuario desde el front end, por eso es DATA
     data = request.get_json()
     if not data.get("email") or not data.get("password"):

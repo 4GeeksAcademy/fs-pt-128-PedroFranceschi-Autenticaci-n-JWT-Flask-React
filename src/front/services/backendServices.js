@@ -33,3 +33,21 @@ export const privateCheck = async () => {
     }    
     return data
 }
+
+export const register = async(user, navigate) => {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/register`, {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
+    const data = await response.json()
+    if(!response.ok) {
+        alert(data.error || data.msg)
+        return
+    }
+    alert("User created!")
+    navigate("/")
+}
